@@ -1,0 +1,25 @@
+{
+  "name": "process",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "server:local": "nodemon src/testServer.ts"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.6",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-openapi-validator": "^3.12.7",
+    "gent-core": "^0.3.3",
+    "mongodb": "^3.5.6",
+    "nodemon": "^2.0.3",
+    "swagger-ui-express": "^4.1.4",
+    "ts-node": "^8.9.1",
+    "typescript": "^3.8.3",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^3.5.14"
+  }
+}
