@@ -48,6 +48,8 @@ new OpenApiValidator({
       const router = createRouter(worker)
       app.use(router)
 
-      app.listen(8080)
+      app.listen(8080, () => {
+        console.log('Server running on port 8080')
+      })
     })
   })

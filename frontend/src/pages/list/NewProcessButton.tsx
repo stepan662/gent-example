@@ -13,6 +13,7 @@ const NewProcessButton = () => {
       try {
         const data = await client.post('/start')
         mutate(`/state?id=${data.id}`, data)
+        mutate(`/processes?limit=100`, null)
         window.location.href = `/process/${data.id}`
       } catch (e) {
         setLoading(false)

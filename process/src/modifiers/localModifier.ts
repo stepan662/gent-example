@@ -7,7 +7,6 @@ import {
   ProcessResourceType,
 } from 'gent-core/lib/Types'
 
-
 type DataType = {
   process: ProcessStateType[]
   journal: JournalMutationType[]
@@ -34,7 +33,9 @@ class Modifier implements ModifierType {
   }
 
   async getProcesses() {
-    return data.process
+    const result = [...data.process]
+    result.reverse()
+    return result
   }
 
   async updateProcess(state: ProcessStateType) {

@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 `
 
 const List = () => {
-  const { data } = useSWR('/processes?limit=100', { dedupingInterval: 0 })
+  const { data } = useSWR('/processes?limit=100', { refreshInterval: 5000 })
 
   return (
     <Container>

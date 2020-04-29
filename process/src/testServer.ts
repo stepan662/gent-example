@@ -8,7 +8,7 @@ import * as swaggerUi from 'swagger-ui-express'
 import * as yaml from 'yamljs'
 
 import Worker from 'gent-core/lib/Worker'
-import LocalModifier from 'gent-core/lib/tools/LocalModifier'
+import LocalModifier from './modifiers/localModifier'
 
 import { OpenApiValidator } from 'express-openapi-validator'
 import { createRouter } from './expressRouter'
@@ -38,5 +38,7 @@ new OpenApiValidator({
 
     app.use(gentRouter)
 
-    app.listen(8080)
+    app.listen(8080, () => {
+      console.log('Server running on port 8080')
+    })
   })

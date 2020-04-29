@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "server:local": "nodemon src/testServer.ts"
+    "server:local": "nodemon src/testServer.ts",
+    "server:mongo": "nodemon src/server.ts",
+    "mongo:init": "ts-node src/scripts/mongoInit.ts"
   },
   "dependencies": {
-    "@types/express": "^4.17.6",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -20,6 +21,7 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
-    "@types/mongodb": "^3.5.14"
+    "@types/mongodb": "^3.5.14",
+    "@types/express": "^4.17.6"
   }
 }

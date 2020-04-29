@@ -14,9 +14,9 @@ const swrConfig: ConfigInterface = {
     return await client(url, ...args)
   },
   refreshInterval: 0,
-  revalidateOnFocus: false,
+  revalidateOnFocus: true,
   revalidateOnReconnect: false,
-  dedupingInterval: 0,
+  dedupingInterval: 1,
 }
 
 const Wrapper = styled.div`

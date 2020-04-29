@@ -7,10 +7,10 @@ import {
 } from 'gent-core/lib/Types'
 import { MongoClient, ObjectId } from 'mongodb'
 
-const DB_NAME = 'test'
-const JOURNAL_COLLECTION_NAME = 'journal'
-const PROCESS_COLLECTION_NAME = 'process'
-const QUEUE_COLLECTION_NAME = 'queue'
+export const DB_NAME = 'test'
+export const JOURNAL_COLLECTION_NAME = 'journal'
+export const PROCESS_COLLECTION_NAME = 'process'
+export const QUEUE_COLLECTION_NAME = 'queue'
 
 function serializeJournal(data) {
   return {

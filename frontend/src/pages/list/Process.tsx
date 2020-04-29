@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Link } from 'react-router-dom'
-
 const StyledLink = styled.a`
   display: flex;
   border-bottom: 1px solid lightgray;
@@ -29,12 +27,12 @@ function actionToState(action) {
 const ProcessOverview = ({ data }) => {
   return (
     <div>
-      <Link to={`/process/${data.id}`}>
+      <a href={`/process/${data.id}`}>
         <StyledLink>
           <ProcessId>Id: {data.id}</ProcessId>
           <ProcessStatus>{actionToState(data.current.status)}</ProcessStatus>
         </StyledLink>
-      </Link>
+      </a>
     </div>
   )
 }
