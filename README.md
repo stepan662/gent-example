@@ -2,7 +2,7 @@
 
 # Gent example project
 
-This is gent example project, it uses [gent-core](https://github.com/stepan662/gent-core) and [gent-diagram](https://github.com/stepan662/gent-diagram) packages to demonstrate how to use them.
+This is gent example project, it uses [gent-core](https://github.com/stepan662/gent/tree/master/gent-core) and [gent-diagram](https://github.com/stepan662/gent/tree/master/gent-diagram) packages to demonstrate how to use them.
 
 ## Basic setup
 
