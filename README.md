@@ -19,10 +19,8 @@ This is gent example project, it uses [gent-core](https://github.com/stepan662/g
   - `yarn server:local` to start on port 8080
 - Start frontend in `/frontend` folder
   - `yarn install`
-  - `yarn start` to start on port 3000
+  - `yarn dev` to start on port 3000
 - Open browser on `http://localhost:3000`
-
-### Notes about server part
 
 This setup will start server in development mode, with data stored in memory. Data will be erased with every server restart.
 

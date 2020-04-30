@@ -2,9 +2,9 @@ import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import Button from '@kiwicom/orbit-components/lib/Button'
 import { mutate } from 'swr'
-import { useParams } from 'react-router-dom'
 
 import client from '../../client'
+import { useRouter } from 'next/router'
 
 type Props = {
   state: any
@@ -19,7 +19,8 @@ const Wrapper = styled.div`
 `
 
 const ManualTask = ({ state }: Props) => {
-  const { processId } = useParams()
+  const router = useRouter()
+  const { processId } = router.query
 
   const [manualLoading, setManualLoading] = useState(false)
   const [autoLoading, setAutoLoading] = useState(false)

@@ -2,8 +2,8 @@ import React from 'react'
 
 import useSWR from 'swr'
 import GentDiagram from 'gent-diagram'
-import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import { useRouter } from 'next/router'
 
 import ErrorVisualizer from '../../components/ErrorVisualizer'
 import ManualTask from './ManualTask'
@@ -15,7 +15,9 @@ const Container = styled.div`
 `
 
 const Process = () => {
-  const { processId } = useParams()
+  const router = useRouter()
+
+  const { processId } = router.query
 
   const { data: schema, revalidate: schemaRevalidate } = useSWR('/schema', {
     refreshInterval: 10000,

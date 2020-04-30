@@ -18,13 +18,13 @@ const [start, userTask] = b.connect(
 const manualOrAuto = userTask.connect(
   n.exclusive({
     name: 'Manual or auto?',
+    decide: (results) => {
+      return results.userTask.type
+    },
   }),
 )
 
 const auto = manualOrAuto.connect(
-  n.linkExclusive({
-    if: (results) => results.userTask?.type === 'auto',
-  }),
   n.taskSystem({
     id: 'auto',
     name: 'Auto',
@@ -35,9 +35,6 @@ const auto = manualOrAuto.connect(
 )
 
 const manual = manualOrAuto.connect(
-  n.linkExclusive({
-    if: (results) => results.userTask?.type === 'manual',
-  }),
   n.taskUser({
     id: 'manual',
     name: 'Manual',

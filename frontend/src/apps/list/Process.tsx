@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Link from 'next/link'
 
 const StyledLink = styled.a`
   display: flex;
@@ -27,10 +28,12 @@ function actionToState(action) {
 const ProcessOverview = ({ data }) => {
   return (
     <div>
-      <StyledLink href={`/process/${data.id}`}>
-        <ProcessId>Id: {data.id}</ProcessId>
-        <ProcessStatus>{actionToState(data.status)}</ProcessStatus>
-      </StyledLink>
+      <Link href={`/process?processId=${data.id}`} passHref>
+        <StyledLink>
+          <ProcessId>Id: {data.id}</ProcessId>
+          <ProcessStatus>{actionToState(data.status)}</ProcessStatus>
+        </StyledLink>
+      </Link>
     </div>
   )
 }

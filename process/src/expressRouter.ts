@@ -1,5 +1,6 @@
 import * as express from 'express'
 import Worker from 'gent-core/lib/Worker'
+import { Subtask } from 'gent-core/lib/Subtask'
 
 const asyncHandler = (
   func: (req: express.Request, res: express.Response) => Promise<void> | void,
@@ -8,15 +9,15 @@ const asyncHandler = (
 }
 
 export const createRouter = (worker: Worker) => {
-  const handleWrite = (taskId, subtaskId) => async (req, res) => {
+  const handleAsync = (taskId, subtaskId) => async (req, res) => {
     const processId = req.query.id
-    const result = await worker.handleExternalTask(processId, taskId, subtaskId, [req.body])
+    const result = await worker.runAsyncSubtask(processId, taskId, subtaskId, [req.body])
     res.send(result.state)
   }
 
   const handleRead = (taskId, subtaskId) => async (req, res) => {
     const processId = req.query.id
-    const result = await worker.handleReadTask(processId, taskId, subtaskId, [req.body])
+    const result = await worker.runReadSubtask(processId, taskId, subtaskId, [req.body])
     res.send(result)
   }
 
@@ -71,13 +72,13 @@ export const createRouter = (worker: Worker) => {
   const tasks = worker.process.nodes.filter((n) => n.type === 'task' && n.id)
 
   for (const task of tasks) {
-    for (const [subtaskId, subTask] of Object.entries(task)) {
-      if (typeof subTask === 'object' && subTask.external === true) {
+    for (const [subtaskId, subtask] of Object.entries(task)) {
+      if (subtask instanceof Subtask) {
         const path = `/task/${task.id}/${subtaskId}`
-        if (subTask.read_only === true) {
-          router[subTask.method || 'get'](path, asyncHandler(handleRead(task.id, subtaskId)))
-        } else if (subTask.read_only === false) {
-          router.post(path, asyncHandler(handleWrite(task.id, subtaskId)))
+        if (subtask.type === 'read') {
+          router.get(path, asyncHandler(handleRead(task.id, subtaskId)))
+        } else if (subtask.type === 'async') {
+          router.post(path, asyncHandler(handleAsync(task.id, subtaskId)))
         }
       }
     }

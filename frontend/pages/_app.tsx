@@ -3,11 +3,8 @@ import React from 'react'
 import { SWRConfig, ConfigInterface } from 'swr'
 import styled, { ThemeProvider } from 'styled-components'
 import { getTokens } from '@kiwicom/orbit-design-tokens'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import client from './client'
-import List from './pages/list/List'
-import ProcessDetail from './pages/detail/ProcessDetail'
+import client from '../src/client'
 
 const swrConfig: ConfigInterface = {
   fetcher: async (url, ...args) => {
@@ -27,24 +24,15 @@ const Wrapper = styled.div`
   -moz-osx-font-smoothing: grayscale;
 `
 
-const App = () => {
+const App = ({ Component, pageProps }) => {
   return (
-    <SWRConfig value={swrConfig}>
-      <ThemeProvider theme={{ orbit: getTokens() }}>
+    <ThemeProvider theme={{ orbit: getTokens() }}>
+      <SWRConfig value={swrConfig}>
         <Wrapper>
-          <Router>
-            <Switch>
-              <Route path="/" exact>
-                <List />
-              </Route>
-              <Route path="/process/:processId">
-                <ProcessDetail />
-              </Route>
-            </Switch>
-          </Router>
+          <Component {...pageProps} />
         </Wrapper>
-      </ThemeProvider>
-    </SWRConfig>
+      </SWRConfig>
+    </ThemeProvider>
   )
 }
 
