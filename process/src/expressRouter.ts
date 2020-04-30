@@ -1,6 +1,7 @@
 import * as express from 'express'
 import Worker from 'gent-core/lib/Worker'
 import { Subtask } from 'gent-core/lib/Subtask'
+import CustomModifierInterface from './modifiers/CustomModifierInterface'
 
 const asyncHandler = (
   func: (req: express.Request, res: express.Response) => Promise<void> | void,
@@ -8,7 +9,7 @@ const asyncHandler = (
   return async (req, res, next) => Promise.resolve(func(req, res)).catch((e) => next(e))
 }
 
-export const createRouter = (worker: Worker) => {
+export const createRouter = (worker: Worker, customModifier: CustomModifierInterface) => {
   const handleAsync = (taskId, subtaskId) => async (req, res) => {
     const processId = req.query.id
     const result = await worker.runAsyncSubtask(processId, taskId, subtaskId, [req.body])
@@ -43,7 +44,7 @@ export const createRouter = (worker: Worker) => {
     '/state',
     asyncHandler(async (req, res) => {
       const id = req.query.id as string
-      const state = await worker.modifier.getProcess(id)
+      const state = await customModifier.getProcess(id)
       res.send(state)
     }),
   )
@@ -51,8 +52,7 @@ export const createRouter = (worker: Worker) => {
   router.get(
     '/processes',
     asyncHandler(async (req, res) => {
-      // @ts-ignore
-      const processes = await worker.modifier.getProcesses()
+      const processes = await customModifier.getProcesses()
       res.send({
         payload: processes,
       })
@@ -63,7 +63,7 @@ export const createRouter = (worker: Worker) => {
     '/journal',
     asyncHandler(async (req, res) => {
       const id = req.query.id as string
-      const journal = await worker.modifier.getJournalEntries(id)
+      const journal = await customModifier.getJournalEntries(id)
       res.send(journal)
     }),
   )

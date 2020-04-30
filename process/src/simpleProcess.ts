@@ -44,8 +44,18 @@ const manual = manualOrAuto.connect(
   }),
 )
 
-const end = auto.connect(n.end({ id: 'end', name: 'End' }))
-manual.connect(end)
+const secondTask = auto.connect(
+  n.taskSystem({
+    id: 'secondTask',
+    name: 'Second task',
+    exec: () => {
+      console.log('Hello task 2')
+    },
+  }),
+)
+manual.connect(secondTask)
+
+secondTask.connect(n.end())
 
 const simpleProcess = new Process(
   {

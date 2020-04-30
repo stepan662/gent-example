@@ -1,11 +1,11 @@
 import {
-  ModifierType,
   ProcessStateType,
   JournalMutationType,
   ProcessNotifierType,
   ProcessNotifierFilterType,
 } from 'gent-core/lib/Types'
 import { MongoClient, ObjectId } from 'mongodb'
+import CustomModifierInterface from './CustomModifierInterface'
 
 export const DB_NAME = 'test'
 export const JOURNAL_COLLECTION_NAME = 'journal'
@@ -26,7 +26,7 @@ function deserializeJournal(data) {
   }
 }
 
-class Modifier implements ModifierType {
+class Modifier implements CustomModifierInterface {
   client: MongoClient
   constructor(client: MongoClient) {
     this.client = client

@@ -41,11 +41,12 @@ new OpenApiValidator({
         process.exit(1)
       }
 
-      const worker = new Worker(simpleProcess, new MongoModifier(client))
+      const mongoModifier = new MongoModifier(client)
+      const worker = new Worker(simpleProcess, mongoModifier)
 
       worker.poll(1000)
 
-      const router = createRouter(worker)
+      const router = createRouter(worker, mongoModifier)
       app.use(router)
 
       app.listen(8080, () => {

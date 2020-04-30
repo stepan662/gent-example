@@ -16,8 +16,9 @@ import simpleProcess from './simpleProcess'
 
 const swaggerDocument = yaml.load(path.join(__dirname, 'schema/schema.yaml'))
 
-const worker = new Worker(simpleProcess, new LocalModifier())
-const gentRouter = createRouter(worker)
+const localModifier = new LocalModifier()
+const worker = new Worker(simpleProcess, localModifier)
+const gentRouter = createRouter(worker, localModifier)
 
 const app = express()
 
@@ -34,7 +35,7 @@ new OpenApiValidator({
 })
   .install(app)
   .then(() => {
-    worker.poll(100)
+    worker.poll(1000)
 
     app.use(gentRouter)
 
