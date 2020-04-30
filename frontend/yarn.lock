@@ -4812,10 +4812,10 @@ gensync@^1.0.0-beta.1:
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.1.tgz#58f4361ff987e5ff6e1e7a210827aa371eaac269"
   integrity sha512-r8EC6NO1sngH/zdD9fiRDLdcgnbayXah+mLgManTaIZJqEC1MZstmnox8KpnI2/fxQwrp5OpCOYWLp4rBl4Jcg==
 
-gent-diagram@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/gent-diagram/-/gent-diagram-0.3.0.tgz#0ccc641c1f1ab3deb3ff251da5be5f9921d14c9c"
-  integrity sha512-rT7sEV2dnkhTvfnOSeDzC30Aj1/Jb7d+jvPEJ7eLDn5khEXsy5Uk1J3bMfWMiu+HOfmfKoBM9ejBqbkpGhCykw==
+gent-diagram@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/gent-diagram/-/gent-diagram-0.4.0.tgz#93c4d0c8946a923c4d3c87b757d8fc0d2517d0be"
+  integrity sha512-nn2Jns+q4woMYZG755QZMczc9qv0tk93wncX2SIM4F5wvP3M8EPE93Xur/L5GyKIPDGEVuCXngWmSpJDh/ojfA==
   dependencies:
     dagre "^0.8.5"
     react "^16.13.1"

@@ -32,7 +32,7 @@ If you want to use persistent storage, you can use prepared demo with mongodb.
 
 In `/process` folder:
 
-- Store mongo access uri into `.env` (check `.env-sample` for exact format) and make sure db instance is accessible.
+- Store mongo access url into `.env` (check `.env-sample` for exact format) and make sure db instance is accessible.
 
 - Run `yarn mongo:init` to create collections needed for processes.
 

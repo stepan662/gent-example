@@ -24,7 +24,7 @@ const List = () => {
         <NewProcessButton />
 
         <h2>Processes: </h2>
-        {data && data.payload.map((process) => <ProcessOverview data={process} />)}
+        {data && data.payload.map((process) => <ProcessOverview key={process.id} data={process} />)}
       </Wrapper>
     </Container>
   )

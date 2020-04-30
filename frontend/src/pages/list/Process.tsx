@@ -27,12 +27,10 @@ function actionToState(action) {
 const ProcessOverview = ({ data }) => {
   return (
     <div>
-      <a href={`/process/${data.id}`}>
-        <StyledLink>
-          <ProcessId>Id: {data.id}</ProcessId>
-          <ProcessStatus>{actionToState(data.current.status)}</ProcessStatus>
-        </StyledLink>
-      </a>
+      <StyledLink href={`/process/${data.id}`}>
+        <ProcessId>Id: {data.id}</ProcessId>
+        <ProcessStatus>{actionToState(data.status)}</ProcessStatus>
+      </StyledLink>
     </div>
   )
 }

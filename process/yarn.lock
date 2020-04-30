@@ -686,10 +686,10 @@ fsevents@~2.1.2:
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.1.3.tgz#fb738703ae8d2f9fe900c33836ddebee8b97f23e"
   integrity sha512-Auw9a4AxqWpa9GUfj370BMPzzyncfBABW8Mab7BGWBYDj4Isgq+cDKtx0i6u9jcX9pQDnswsaaOTgTmA5pEjuQ==
 
-gent-core@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/gent-core/-/gent-core-0.3.3.tgz#250b68031d760e54a50940fa629be873d4a23851"
-  integrity sha512-oAGrPI1hNDb0o3YmuKxKgZeGEKg2/Dm1/UPhwqXvOMQxheJ4Z9jZ2AkN3dVpU6IzVLeIf/ZDpJrB2fWMfCAEzQ==
+gent-core@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/gent-core/-/gent-core-0.4.0.tgz#06237e77675c1bbf72b4b17cb57b8f6800eb893c"
+  integrity sha512-YRYb63vE7cWbniOVVFs7bfyvmv87si6PMijnJZuv254UKC4AImr4UAtCMfC6qxZ4ZCfqMjbTgn5L/CdjpiEDbQ==
   dependencies:
     continuation-local-storage "^3.2.1"
 

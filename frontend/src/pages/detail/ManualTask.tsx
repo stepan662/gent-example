@@ -55,7 +55,7 @@ const ManualTask = ({ state }: Props) => {
     setManualLoading(false)
   }, [processId])
 
-  switch (state?.current?.task) {
+  switch (state?.task) {
     case 'userTask':
       return (
         <Wrapper>

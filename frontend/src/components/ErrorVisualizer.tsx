@@ -20,8 +20,8 @@ const ErrorStack = styled.div`
 const ErrorVisualizer = ({ state }) => {
   return (
     <Container>
-      <ErrorHeader>{`Error in '${state.current.task}.${state.current.subtask}'`}</ErrorHeader>
-      <ErrorStack>{state.current.error.stack}</ErrorStack>
+      <ErrorHeader>{`Error in '${state.task}.${state.subtask}'`}</ErrorHeader>
+      <ErrorStack>{state.error.stack}</ErrorStack>
     </Container>
   )
 }

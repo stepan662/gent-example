@@ -28,9 +28,9 @@ const Process = () => {
     <Container>
       {schema && <GentDiagram schema={schema} state={process} />}
 
-      {process?.current?.status === 'error' && <ErrorVisualizer state={process} />}
+      {process?.status === 'error' && <ErrorVisualizer state={process} />}
 
-      {process?.current?.status === 'waiting' && <ManualTask state={process} />}
+      {process?.status === 'waiting' && <ManualTask state={process} />}
 
       {schemaRevalidate && !schema && <div>Loading</div>}
     </Container>
