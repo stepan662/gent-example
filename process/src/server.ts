@@ -7,7 +7,7 @@ import * as cors from 'cors'
 import * as swaggerUi from 'swagger-ui-express'
 import * as yaml from 'yamljs'
 
-import Worker from 'gent-core/lib/Worker'
+import GentAutomat from 'gent-core/lib/Automat'
 import { OpenApiValidator } from 'express-openapi-validator'
 import { createRouter } from './expressRouter'
 import MongoModifier from './modifiers/mongoModifier'
@@ -42,9 +42,9 @@ new OpenApiValidator({
       }
 
       const mongoModifier = new MongoModifier(client)
-      const worker = new Worker(simpleProcess, mongoModifier)
+      const worker = new GentAutomat(simpleProcess, mongoModifier, true)
 
-      worker.poll(1000)
+      worker.poll(100, true)
 
       const router = createRouter(worker, mongoModifier)
       app.use(router)

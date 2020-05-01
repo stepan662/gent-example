@@ -78,7 +78,7 @@ paths:
             application/json:
               schema: {}
 
-  /task/userTask/resolve:
+  /task/usertask/resolve:
     post:
       summary: Finish tasks
       tags:

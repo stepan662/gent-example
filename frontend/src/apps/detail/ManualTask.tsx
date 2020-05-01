@@ -30,7 +30,7 @@ const ManualTask = ({ state }: Props) => {
     mutate(
       `/state?id=${processId}`,
       await client.post(
-        '/task/userTask/resolve',
+        '/task/usertask/resolve',
         { type: 'manual' },
         { params: { id: processId } },
       ),
@@ -42,7 +42,7 @@ const ManualTask = ({ state }: Props) => {
     setAutoLoading(true)
     mutate(
       `/state?id=${processId}`,
-      await client.post('/task/userTask/resolve', { type: 'auto' }, { params: { id: processId } }),
+      await client.post('/task/usertask/resolve', { type: 'auto' }, { params: { id: processId } }),
     )
     setAutoLoading(false)
   }, [processId])
@@ -57,7 +57,7 @@ const ManualTask = ({ state }: Props) => {
   }, [processId])
 
   switch (state?.task) {
-    case 'userTask':
+    case 'usertask':
       return (
         <Wrapper>
           <Button loading={autoLoading} onClick={handleAuto}>

@@ -1,13 +1,15 @@
 import b from 'gent-core/lib/NodeBuilder'
 import * as n from 'gent-core/lib/Node'
 import Process from 'gent-core/lib/Process'
+import { SubtaskResult } from 'gent-core/lib/Subtask'
+import { gentGetState, gentUpdateState } from 'gent-core/lib/Hooks'
 
-const [start, userTask] = b.connect(
+const [start, usertask] = b.connect(
   n.start({
     name: 'Process start',
   }),
   n.taskUser({
-    id: 'userTask',
+    id: 'usertask',
     name: 'User task',
     resolve: async (data) => {
       return data
@@ -15,11 +17,11 @@ const [start, userTask] = b.connect(
   }),
 )
 
-const manualOrAuto = userTask.connect(
+const manualOrAuto = usertask.connect(
   n.exclusive({
     name: 'Manual or auto?',
     decide: (results) => {
-      return results.userTask.type
+      return results.usertask.type
     },
   }),
 )
@@ -29,7 +31,16 @@ const auto = manualOrAuto.connect(
     id: 'auto',
     name: 'Auto',
     exec: () => {
-      return new Promise((resolve) => setTimeout(resolve, 5000))
+      const counter = (gentGetState().counter || 0) + 1
+      gentUpdateState({ counter })
+      if (counter < 3) {
+        return new SubtaskResult({
+          delay: 1000,
+          nextSubtask: 'exec',
+        })
+      } else {
+        return 'done'
+      }
     },
   }),
 )
@@ -54,6 +65,7 @@ const secondTask = auto.connect(
   }),
 )
 manual.connect(secondTask)
+manual.connect(n.linkTimeout({ timeout: 30 }), secondTask)
 
 secondTask.connect(n.end())
 

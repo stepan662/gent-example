@@ -45,16 +45,20 @@ class Modifier implements CustomModifierInterface {
   }
 
   async updateProcess(process: ProcessStateType) {
-    return (
-      await this.client
-        .db(DB_NAME)
-        .collection(PROCESS_COLLECTION_NAME)
-        .findOneAndUpdate(
-          { _id: new ObjectId(process.id) },
-          { $set: process },
-          { returnOriginal: false },
-        )
-    ).value
+    const result = this.mapId(
+      (
+        await this.client
+          .db(DB_NAME)
+          .collection(PROCESS_COLLECTION_NAME)
+          .findOneAndUpdate(
+            { _id: new ObjectId(process.id) },
+            { $set: process },
+            { returnOriginal: false },
+          )
+      ).value,
+    )
+
+    return result
   }
 
   async getProcess(processId: string): Promise<ProcessStateType> {
@@ -114,7 +118,8 @@ class Modifier implements CustomModifierInterface {
       .collection(QUEUE_COLLECTION_NAME)
       .findOneAndDelete(search)
 
-    return response.value
+    const result = response.value || undefined
+    return result
   }
 }
 

@@ -7,7 +7,7 @@ import * as cors from 'cors'
 import * as swaggerUi from 'swagger-ui-express'
 import * as yaml from 'yamljs'
 
-import Worker from 'gent-core/lib/Worker'
+import GentAutomat from 'gent-core/lib/Automat'
 import LocalModifier from './modifiers/localModifier'
 
 import { OpenApiValidator } from 'express-openapi-validator'
@@ -17,7 +17,7 @@ import simpleProcess from './simpleProcess'
 const swaggerDocument = yaml.load(path.join(__dirname, 'schema/schema.yaml'))
 
 const localModifier = new LocalModifier()
-const worker = new Worker(simpleProcess, localModifier)
+const worker = new GentAutomat(simpleProcess, localModifier, true)
 const gentRouter = createRouter(worker, localModifier)
 
 const app = express()
@@ -35,7 +35,7 @@ new OpenApiValidator({
 })
   .install(app)
   .then(() => {
-    worker.poll(1000)
+    worker.poll(1000, true)
 
     app.use(gentRouter)
 

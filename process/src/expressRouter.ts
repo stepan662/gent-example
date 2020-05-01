@@ -1,5 +1,5 @@
 import * as express from 'express'
-import Worker from 'gent-core/lib/Worker'
+import Automat from 'gent-core/lib/Automat'
 import { Subtask } from 'gent-core/lib/Subtask'
 import CustomModifierInterface from './modifiers/CustomModifierInterface'
 
@@ -9,7 +9,7 @@ const asyncHandler = (
   return async (req, res, next) => Promise.resolve(func(req, res)).catch((e) => next(e))
 }
 
-export const createRouter = (worker: Worker, customModifier: CustomModifierInterface) => {
+export const createRouter = (worker: Automat, customModifier: CustomModifierInterface) => {
   const handleAsync = (taskId, subtaskId) => async (req, res) => {
     const processId = req.query.id
     const result = await worker.runAsyncSubtask(processId, taskId, subtaskId, [req.body])
