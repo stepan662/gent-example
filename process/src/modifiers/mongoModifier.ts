@@ -32,7 +32,7 @@ class Modifier implements CustomModifierInterface {
     this.client = client
   }
 
-  private mapId = ({ _id, ...other }): any => ({ id: _id, ...other })
+  private mapId = ({ _id, ...other }): any => ({ id: String(_id), ...other })
 
   async createProcess(state: ProcessStateType) {
     const data = { ...state }
