@@ -44,7 +44,7 @@ new OpenApiValidator({
       const mongoModifier = new MongoModifier(client)
       const worker = new GentAutomat(simpleProcess, mongoModifier, true)
 
-      worker.poll(100, true)
+      worker.poll(1000, true)
 
       const router = createRouter(worker, mongoModifier)
       app.use(router)

@@ -32,7 +32,7 @@ const Process = () => {
 
       {process?.status === 'error' && <ErrorVisualizer state={process} />}
 
-      {process?.status === 'waiting' && <ManualTask state={process} />}
+      {process?.status === 'waiting' && <ManualTask key={process.status} state={process} />}
 
       {schemaRevalidate && !schema && <div>Loading</div>}
     </Container>
