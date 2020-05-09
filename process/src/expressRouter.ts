@@ -82,13 +82,6 @@ export const createRouter = (worker: Automat, customModifier: CustomModifierInte
         lastState = newState
       }
 
-      history.push({
-        id: null,
-        timestamp: lastState.created,
-        message: 'init',
-        state: lastState,
-      })
-
       res.send(history)
     }),
   )
