@@ -2,6 +2,7 @@ import * as express from 'express'
 import Automat from 'gent-core/lib/Automat'
 import { Subtask } from 'gent-core/lib/Subtask'
 import CustomModifierInterface from './modifiers/CustomModifierInterface'
+import { revertState } from 'gent-core/lib/Journal'
 
 const asyncHandler = (
   func: (req: express.Request, res: express.Response) => Promise<void> | void,
@@ -63,8 +64,32 @@ export const createRouter = (worker: Automat, customModifier: CustomModifierInte
     '/journal',
     asyncHandler(async (req, res) => {
       const id = req.query.id as string
+      const state = await customModifier.getProcess(id)
+      if (!state) {
+        res.status(404).send()
+      }
       const journal = await customModifier.getJournalEntries(id)
-      res.send(journal)
+      const history = []
+      let lastState = state
+      for (const event of journal) {
+        history.push({
+          id: event.id,
+          timestamp: event.timestamp,
+          message: event.message,
+          state: lastState,
+        })
+        const newState = revertState(lastState, event)
+        lastState = newState
+      }
+
+      history.push({
+        id: null,
+        timestamp: lastState.created,
+        message: 'init',
+        state: lastState,
+      })
+
+      res.send(history)
     }),
   )
 

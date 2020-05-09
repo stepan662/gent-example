@@ -78,6 +78,22 @@ paths:
             application/json:
               schema: {}
 
+  /journal:
+    get:
+      summary: Get process state history
+      tags:
+        - process
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json: {}
+        default:
+          description: Error
+          content:
+            application/json:
+              schema: {}
+
   /task/usertask/resolve:
     post:
       summary: Finish tasks

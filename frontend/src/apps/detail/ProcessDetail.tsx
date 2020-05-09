@@ -7,11 +7,19 @@ import { useRouter } from 'next/router'
 
 import ErrorVisualizer from '../../components/ErrorVisualizer'
 import ManualTask from './ManualTask'
+import Button from '@kiwicom/orbit-components/lib/Button'
 
 const Container = styled.div`
   width: 1000px;
   margin: 0px auto;
   max-width: 100%;
+  position: relative;
+`
+
+const Header = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
 `
 
 const Process = () => {
@@ -28,6 +36,13 @@ const Process = () => {
 
   return (
     <Container>
+      {schema && (
+        <Header>
+          <Button size="small" href={`/history?processId=${processId}`}>
+            Show history
+          </Button>
+        </Header>
+      )}
       {schema && <GentDiagram schema={schema} state={process} />}
 
       {process?.status === 'error' && <ErrorVisualizer state={process} />}

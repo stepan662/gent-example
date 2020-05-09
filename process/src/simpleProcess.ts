@@ -65,7 +65,7 @@ const secondTask = auto.connect(
   }),
 )
 manual.connect(secondTask)
-manual.connect(n.linkTimeout({ timeout: 30 }), secondTask)
+manual.connect(n.linkTimeout({ timeout: 30 }), auto)
 
 secondTask.connect(n.end())
 

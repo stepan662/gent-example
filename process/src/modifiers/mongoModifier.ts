@@ -95,10 +95,13 @@ class Modifier implements CustomModifierInterface {
     return (
       await this.client
         .db(DB_NAME)
-        .collection(PROCESS_COLLECTION_NAME)
+        .collection(JOURNAL_COLLECTION_NAME)
         .find({ process_id: processId })
+        .sort([['_id', -1]])
         .toArray()
-    ).map(deserializeJournal)
+    )
+      .map(deserializeJournal)
+      .map(this.mapId)
   }
 
   async addNotifier(notifier: ProcessNotifierType): Promise<void> {
