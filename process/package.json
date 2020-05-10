@@ -1,11 +1,14 @@
 {
-  "name": "process",
+  "name": "example-process",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "server:local": "nodemon src/testServer.ts",
     "server:mongo": "nodemon src/server.ts",
-    "mongo:init": "ts-node src/scripts/mongoInit.ts"
+    "start": "node build/server.js",
+    "mongo:init": "ts-node src/scripts/mongoInit.ts",
+    "build": "tsc",
+    "deploy": "rm -rf build && tsc && gcloud app deploy --project=gent-example"
   },
   "dependencies": {
     "cors": "^2.8.5",

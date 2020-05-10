@@ -19,10 +19,10 @@ export interface CustomAxios {
 }
 
 const client = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: process.env.BACKEND_API,
 })
 
-client.interceptors.response.use(r => {
+client.interceptors.response.use((r) => {
   return r.data
 })
 

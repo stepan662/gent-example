@@ -14,7 +14,7 @@ import { OpenApiValidator } from 'express-openapi-validator'
 import { createRouter } from './expressRouter'
 import simpleProcess from './simpleProcess'
 
-const swaggerDocument = yaml.load(path.join(__dirname, 'schema/schema.yaml'))
+const swaggerDocument = yaml.load(path.join(__dirname, '../schema.yaml'))
 
 const localModifier = new LocalModifier()
 const worker = new GentAutomat(simpleProcess, localModifier, true)
@@ -29,7 +29,7 @@ app.use(cors())
 app.use(express.json())
 
 new OpenApiValidator({
-  apiSpec: path.join(__dirname, 'schema/schema.yaml'),
+  apiSpec: path.join(__dirname, '../schema.yaml'),
   validateRequests: true,
   validateResponses: false,
 })

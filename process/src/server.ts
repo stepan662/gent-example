@@ -14,9 +14,11 @@ import MongoModifier from './modifiers/mongoModifier'
 import { MongoClient } from 'mongodb'
 import simpleProcess from './simpleProcess'
 
+const PORT = process.env.PORT || 8080
+
 const url = process.env.DB_CONNECTION
 
-const swaggerDocument = yaml.load(path.join(__dirname, 'schema/schema.yaml'))
+const swaggerDocument = yaml.load(path.join(__dirname, '../schema.yaml'))
 
 const app = express()
 
@@ -27,7 +29,7 @@ app.use(cors())
 app.use(express.json())
 
 new OpenApiValidator({
-  apiSpec: path.join(__dirname, 'schema/schema.yaml'),
+  apiSpec: path.join(__dirname, '../schema.yaml'),
   validateRequests: {
     allowUnknownQueryParameters: false,
   },
@@ -49,8 +51,8 @@ new OpenApiValidator({
       const router = createRouter(worker, mongoModifier)
       app.use(router)
 
-      app.listen(8080, () => {
-        console.log('Server running on port 8080')
+      app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`)
       })
     })
   })
