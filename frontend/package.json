@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start --port ${PORT:-3000}",
-    "deploy": "next build && gcloud app deploy --project=gent-example-frontend"
+    "deploy": "next build && next export && firebase deploy"
   },
   "dependencies": {
     "@kiwicom/orbit-components": "^0.84.2",
